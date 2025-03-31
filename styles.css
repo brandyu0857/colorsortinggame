@@ -1,0 +1,215 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.game-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    min-width: 900px;
+}
+
+#bottles-container {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: nowrap;
+    min-height: 200px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.bottle {
+    width: 80px;
+    height: 200px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    margin: 0 0.5rem;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    background-image: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(255, 255, 255, 0.2) 20%,
+        rgba(255, 255, 255, 0.1) 30%,
+        rgba(255, 255, 255, 0) 70%
+    );
+    box-shadow: 
+        inset -2px -2px 4px rgba(0, 0, 0, 0.1),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.5),
+        0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove bottle neck and body styles */
+.bottle::before,
+.bottle-body {
+    display: none;
+}
+
+.bottle.selected {
+    transform: translateY(-10px);
+    border-color: rgba(51, 51, 51, 0.3);
+    box-shadow: 
+        inset -2px -2px 4px rgba(0, 0, 0, 0.1),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.5),
+        0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.color-segment {
+    width: 100%;
+    height: 25%;
+    position: absolute;
+    left: 0;
+    transition: all 0.5s ease;
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.1),
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(0, 0, 0, 0.1)
+    );
+}
+
+@keyframes pour-animation-left {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-80px) rotate(-45deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes pour-animation-right {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-80px) rotate(45deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+.pouring-left {
+    animation: pour-animation-left 0.7s ease-in-out;
+}
+
+.pouring-right {
+    animation: pour-animation-right 0.7s ease-in-out;
+}
+
+.receiving {
+    animation: receive-animation 0.7s ease-in-out;
+}
+
+@keyframes receive-animation {
+    0% { transform: translateY(0); }
+    25% { transform: translateY(-5px); }
+    75% { transform: translateY(5px); }
+    100% { transform: translateY(0); }
+}
+
+#reset-button {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#reset-button:hover {
+    background-color: #45a049;
+}
+
+.victory-message {
+    color: #4CAF50;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem 0;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.5s ease;
+}
+
+.victory-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.shake {
+    animation: shake-animation 0.4s ease-in-out;
+}
+
+@keyframes shake-animation {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes confetti-fall {
+    0% { 
+        transform: translateY(-10px) rotate(0deg);
+        opacity: 1;
+    }
+    100% { 
+        transform: translateY(200px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Remove old sparkle animation */
+@keyframes sparkle {
+    0%, 100% { 
+        box-shadow: 
+            0 0 4px #fff,
+            0 0 8px #fff,
+            0 0 12px #fff,
+            0 0 16px #FFD700,
+            0 0 20px #FFD700;
+        transform: scale(1);
+    }
+    50% { 
+        box-shadow: 
+            0 0 8px #fff,
+            0 0 16px #fff,
+            0 0 24px #fff,
+            0 0 32px #FFD700,
+            0 0 40px #FFD700;
+        transform: scale(1.05);
+    }
+}
+
+.bottle.complete {
+    z-index: 1;
+} 
