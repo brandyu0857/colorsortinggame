@@ -25,7 +25,7 @@ h1 {
 .game-container {
     background-color: white;
     padding: 2rem;
-    border-radius: 10px;
+    border-radius: 10px,10px,999px,999px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 1rem;
     min-width: 900px;
