@@ -3,7 +3,7 @@ class BottleGame {
         console.log('Initializing game...');
         this.bottles = [];
         this.selectedBottle = null;
-        this.colors = ['#FF0000', '#00FF00', '#0000FF', '#FFA500', '#800080'];
+        this.colors = ['#f28b82', '#aecbfa', '#ccff90', '#ffd6a5', '#d7aefb'];
         this.bottlesContainer = document.getElementById('bottles-container');
         this.resetButton = document.getElementById('reset-button');
         
