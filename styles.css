@@ -50,7 +50,7 @@ h1 {
     overflow: hidden;
     transition: transform 0.3s ease;
     margin: 0 0.5rem;
-    border: 2px solid rgba(0, 0, 0, 0.1);
+    border: 0px 1px, 1px, 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 10px,10px,99px,99px;
     background-color: rgba(255, 255, 255, 0.8);
     background-image: linear-gradient(
