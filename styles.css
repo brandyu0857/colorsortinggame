@@ -53,7 +53,11 @@ h1 {
     border: 2px solid rgba(0, 0, 0, 0.1);
     border-top: 0;
     border-radius: 10px 10px 9999px 9999px;
-    background-color: rgba(255, 255, 255, 0.8);
+
+    /* Glassy look */
+    background-color: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
     background-image: linear-gradient(
         135deg,
         rgba(255, 255, 255, 0.4) 0%,
@@ -61,29 +65,31 @@ h1 {
         rgba(255, 255, 255, 0.1) 30%,
         rgba(255, 255, 255, 0) 70%
     );
-    box-shadow: 
+    box-shadow:
         inset -2px -2px 4px rgba(0, 0, 0, 0.1),
         inset 2px 2px 4px rgba(255, 255, 255, 0.5),
         0 5px 10px rgba(0, 0, 0, 0.1);
-    
-    .bottle {
-    background-color: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
 }
 
-}
-
-/* Remove bottle neck and body styles */
-.bottle::before,
-.bottle-body {
-    display: none;
+/* Gloss highlight */
+.bottle::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    width: 20%;
+    height: 80%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(255,255,255,0));
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 2;
+    filter: blur(1px);
 }
 
 .bottle.selected {
     transform: translateY(-10px);
     border-color: rgba(51, 51, 51, 0.3);
-    box-shadow: 
+    box-shadow:
         inset -2px -2px 4px rgba(0, 0, 0, 0.1),
         inset 2px 2px 4px rgba(255, 255, 255, 0.5),
         0 8px 15px rgba(0, 0, 0, 0.2);
@@ -178,11 +184,11 @@ h1 {
 }
 
 @keyframes confetti-fall {
-    0% { 
+    0% {
         transform: translateY(-10px) rotate(0deg);
         opacity: 1;
     }
-    100% { 
+    100% {
         transform: translateY(200px) rotate(360deg);
         opacity: 0;
     }
@@ -196,28 +202,7 @@ h1 {
     z-index: 2;
 }
 
-/* Remove old sparkle animation */
-@keyframes sparkle {
-    0%, 100% { 
-        box-shadow: 
-            0 0 4px #fff,
-            0 0 8px #fff,
-            0 0 12px #fff,
-            0 0 16px #FFD700,
-            0 0 20px #FFD700;
-        transform: scale(1);
-    }
-    50% { 
-        box-shadow: 
-            0 0 8px #fff,
-            0 0 16px #fff,
-            0 0 24px #fff,
-            0 0 32px #FFD700,
-            0 0 40px #FFD700;
-        transform: scale(1.05);
-    }
-}
-
 .bottle.complete {
     z-index: 1;
-} 
+    outline: 2px solid #00e676;
+}
